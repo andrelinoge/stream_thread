@@ -1,0 +1,21 @@
+<div class="span9" data-no-turbolink>
+  <div class="span9"><h3>Channels List</h3></div>
+  <% @channels.each do |channel| %>
+    <div class="span9">
+      <div class="span2"><%= link_to channel.name, channel_chats_path(channel) %></div>
+    </div>
+  <% end %>
+</div>
+
+<%= content_for :online_users do %>
+  <div class="span3">
+    <h3>Online Users</h3>
+    <div class="well sidebar-nav" id="online-users">
+      <ul class="nav nav-list">
+        <% @online_users.each do |online_user| %>
+          <li><%= link_to online_user, "#" %></li>
+        <% end %>
+      </ul>
+    </div><!--/.well -->
+  </div><!--/span-->
+<% end %>

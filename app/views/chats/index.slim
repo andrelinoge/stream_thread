@@ -1,0 +1,34 @@
+.row
+  .span6
+    h3 Channel Name : #{@channel.name}
+
+  .span3.exit-button
+    = link_to "EXIT CHAT ROOM", exit_chatroom_channel_chats_path(@channel), class: "pull-right btn btn-danger"
+  
+
+
+.row
+  .span6
+    h3 | Chat Messages 
+
+#chat-messages.row.chat-container
+
+
+.row.chat-form
+  = form_tag("/channels/#{params[:channel_id]}/chats", method: :post, remote: true) 
+    = text_area_tag :message, "" 
+    = submit_tag "Send", class: "btn btn-success" 
+  
+
+
+= content_for :online_users
+  .span3
+    h3
+      = "#{@channel.name} Channel Users List"
+    #channel-members.well.sidebar-nav
+      ul.nav.nav-list
+        - @channel_members.each do |member| 
+          li = link_to member, "#" 
+
+script
+  | var chat = new Chat('#{@channel.id}', '#{current_user.name}');
